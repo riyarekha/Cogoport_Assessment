@@ -40,7 +40,7 @@ def update_configuration(config: schemas.ConfigurationUpdate, db: Session = Depe
     return db_config
 
 
-@app.delete("/delete_configuration", response_model=schemas.ConfigurationResponse)
+@app.delete("/delete_configuration/{country_code}", response_model=schemas.ConfigurationResponse)
 def delete_configuration(country_code: str, db: Session = Depends(get_db)):
     db_config = db.query(models.Configuration).filter(models.Configuration.country_code == country_code).first()
     if db_config is None:
